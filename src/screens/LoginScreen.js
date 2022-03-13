@@ -8,6 +8,7 @@ import {
   TouchableOpacity,
   KeyboardAvoidingView,
   TextInput,
+  Platform,
   Alert,
 } from 'react-native';
 
@@ -91,8 +92,12 @@ const LoginScreen = () => {
             <View style={styles.leftView}>
               <Text style={styles.txtRemember}>
                 {' '}
-                <Icon name="check" size={10} color="#4F8EF7" /> Remember
-                Password
+                <Icon
+                  name="check"
+                  size={Platform?.OS === 'ios' ? 10 : 20}
+                  color="#4F8EF7"
+                />{' '}
+                Remember Password
               </Text>
             </View>
             <Text
