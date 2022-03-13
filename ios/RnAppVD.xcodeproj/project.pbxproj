@@ -96,6 +96,14 @@
 			name = RnAppVD;
 			sourceTree = "<group>";
 		};
+		1877FF8651374C2B9B206232 /* Resources */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			name = Resources;
+			path = "";
+			sourceTree = "<group>";
+		};
 		2D16E6871FA4F8E400B85C8A /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
@@ -134,6 +142,7 @@
 				83CBBA001A601CBA00E9B192 /* Products */,
 				2D16E6871FA4F8E400B85C8A /* Frameworks */,
 				4D2F433E47626E0BA71F0657 /* Pods */,
+				1877FF8651374C2B9B206232 /* Resources */,
 			);
 			indentWidth = 2;
 			sourceTree = "<group>";

@@ -1,6 +1,6 @@
-// import { CheckOutlined } from '@ant-design/icons';
 import React, {useState, useRef} from 'react';
-import {Icon} from 'react-native-vector-icons';
+import axios from 'axios';
+import Icon from 'react-native-vector-icons/AntDesign';
 import {
   StyleSheet,
   Text,
@@ -14,8 +14,8 @@ import {
 import {login} from '../services';
 
 const LoginScreen = () => {
-  const [userEmail, setUserEmail] = useState('');
-  const [userPassword, setUserPassword] = useState('');
+  const [userEmail, setUserEmail] = useState('eve.holt@reqres.in');
+  const [userPassword, setUserPassword] = useState('5cityslicka');
   const passRef = useRef();
   const validateEmail = () => {
     const reg = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/;
@@ -27,22 +27,23 @@ const LoginScreen = () => {
   };
   const callApi = async () => {
     const request = {
-      data: {
-        email: userEmail,
-        password: userPassword,
-      },
+      email: userEmail,
+      password: userPassword,
     };
+
     try {
       const response = await login(request);
-      if (response?.status === 200) {
-        Alert.alert('Successfully get the response');
+      if (response?.status === 200 && response?.data?.token) {
+        Alert.alert(
+          'Successfully get the response token',
+          response?.data?.token,
+        );
       }
     } catch (error) {
       if (error && userPassword === '') {
         Alert.alert('Missing Password');
       } else {
         Alert.alert('Something Went Wrong');
-        console.log('in erorr');
       }
     }
   };
@@ -88,10 +89,11 @@ const LoginScreen = () => {
 
           <View style={styles.rowView}>
             <View style={styles.leftView}>
-              <Text style={styles.txtRemember}>tes</Text>
-              {/* <CheckOutlined style={{color: 'red',fontSize: '2em' }} /> */}
-              <Icon name="ios-add" size={30} color="#4F8EF7" />
-              <Text style={styles.txtRemember}>Remember Password</Text>
+              <Text style={styles.txtRemember}>
+                {' '}
+                <Icon name="check" size={10} color="#4F8EF7" /> Remember
+                Password
+              </Text>
             </View>
             <Text
               style={styles.txtRemember}
@@ -171,8 +173,13 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     justifyContent: 'space-between',
     marginTop: 10,
+    paddingVertical: 10,
   },
-  leftView: {flexDirection: 'row'},
+  leftView: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    alignSelf: 'center',
+  },
   txtRemember: {
     color: '#111212',
     fontWeight: '600',
