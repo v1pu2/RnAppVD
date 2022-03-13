@@ -1,18 +1,15 @@
 import React from 'react';
+import {SafeAreaProvider} from 'react-native-safe-area-context';
 
-import {StyleSheet, Text, View} from 'react-native';
 import LoginScreen from './src/screens/LoginScreen';
+console.disableYellowBox = true;
 
 const App = () => {
-  return <LoginScreen />;
+  return (
+    <SafeAreaProvider>
+      <LoginScreen />
+    </SafeAreaProvider>
+  );
 };
-
-const styles = StyleSheet.create({
-  sectionContainer: {
-    marginTop: 32,
-    paddingHorizontal: 24,
-    backgroundColor: 'red',
-  },
-});
 
 export default App;
