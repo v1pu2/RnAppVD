@@ -11,12 +11,13 @@ import {
   Platform,
   Alert,
 } from 'react-native';
-
+Icon.loadFont().then();
 import {login} from '../services';
 
 const LoginScreen = () => {
   const [userEmail, setUserEmail] = useState('eve.holt@reqres.in');
   const [userPassword, setUserPassword] = useState('5cityslicka');
+  const [isRemember, setIsRemember] = useState(false);
   const passRef = useRef();
   const validateEmail = () => {
     const reg = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/;
@@ -90,13 +91,16 @@ const LoginScreen = () => {
 
           <View style={styles.rowView}>
             <View style={styles.leftView}>
-              <Text style={styles.txtRemember}>
-                {' '}
+              <View style={styles.iconView}>
                 <Icon
                   name="check"
                   size={Platform?.OS === 'ios' ? 10 : 20}
-                  color="#4F8EF7"
-                />{' '}
+                  color={isRemember ? '#4F8EF7' : 'transparent'}
+                />
+              </View>
+              <Text
+                style={styles.txtRemember}
+                onPress={() => setIsRemember(!isRemember)}>
                 Remember Password
               </Text>
             </View>
@@ -190,6 +194,12 @@ const styles = StyleSheet.create({
     fontWeight: '600',
     fontSize: 12,
     lineHeight: 16,
+  },
+  iconView: {
+    borderWidth: 1,
+    borderColor: '#111212',
+    marginRight: 5,
+    padding: 2,
   },
 });
 
